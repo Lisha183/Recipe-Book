@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .mt-4.flex.justify-center { /* Target the specific div */
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 20px; /* Adjust the gap between buttons */
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+}
+
+/* Optional: Adjust button styling */
+.mt-4.flex.justify-center button {
+    padding: 8px 16px; /* Adjust padding as needed */
+    border-radius: 6px; /* Adjust border-radius as needed */
+    /* Add any other button styling you want */
+  
+}
+
+/* Responsive adjustments (optional) */
+@media (max-width: 768px) {
+    .mt-4.flex.justify-center {
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+        align-items: center; /* Center buttons vertically */
+    }
+}
+       
+.card-image {
+    width: 100%;
+    height: 200px; /* Set a fixed height for all images */
+    object-fit: cover; /* Maintain aspect ratio and cover the area */
+}
+
+.recipe-grid-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
+    gap: 20px;
+}
+
+.rating {
+
+padding: 0 10px;
+
+display: flex;
+
+align-items: center;
+
+color: gold;
+
+}
+.star {
+
+font-size: 1.2em;
+
+margin-right: 2px;
+
+}
+
+
+
+.rating-value {
+
+font-size: 0.9em;
+
+color: #666;
+
+margin-left: 5px;
+
+}
+
+
+
+.card-link {
+
+display: block;
+
+padding: 10px;
+
+text-align: center;
+
+background-color: #007bff;
+
+color: #fff;
+
+text-decoration: none;
+}
+
+.card-link:hover {
+background-color: #0056b3;
+
+}
+
+.card-container {
+display: flex; /* Enables flexbox */
+flex-wrap: wrap; /* Allows cards to wrap to the next line on smaller screens */
+gap: 20px; /* Adds space between the cards */
+width: 40px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .recipe-grid {
+        grid-template-columns: 1fr; /* Single column on smaller screens */
+    }
+
+    .card-image {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-title {
+        font-size: 1em;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid" style="background-color: rgb(217, 97, 33);">
+            <img src="generate a logo for a website called flavour fusion . Let it be orange.jpg" alt="Bootstrap" width="60" height="48" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="index.html" style="color: white;">FLAVOUR FUSION</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="recipes.html">Recipes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="personal.html">Personal</a>
+                    </li>
+                    
+                </ul>
+                <div class="search-container">
+                    <form id="search-form" action="#">
+                        <input type="text" id="searchInput" name="query" placeholder="Search...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="card bg-dark text-white">
+        <img src="back.jpeg" class="card-img" alt="Stony Beach" height="460px" style="opacity:0.7;"/>
+        <div class="card-img-overlay" style="text-align: center;">
+            <h5 class="card-title" style="font-size: 25px;">
+                <h1>Welcome to Flavour Fusion</h1>
+                <br>
+                <h3>Welcome to our Online Recipe Website!</h3>
+                <br>
+                <p style="font-size: 20px; color:rgb(255, 253, 253);">"Embark on a flavor-filled adventure at Flavour Fusion! We're here to ignite your passion for cooking and introduce you to a world of exciting recipes. From exotic spices to comforting classics, we've got everything you need to transform your kitchen into a culinary playground. Get ready to explore, experiment, and savor every bite." </p>
+                <p>"Taste the Adventure."</p>
+             
+                <button type="button" class="btn btn-primary" style="background-color:  rgb(217, 97, 33); border: none;" onclick="window.location.href='recipes.html#'">
+                    View Recipes
+                </button>
+                    
+                </div>
+            </div>
+        </div>
+    <br>
+    <div class="mt-4 flex space-x-2 justify-center">     
+        <button class="bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md px-4 py-2">Breakfast</button>
+        <button class="bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md px-4 py-2">Lunch</button>
+        <button class="bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md px-4 py-2">Dinner</button>
+        <button class="bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md px-4 py-2">Desserts</button>
+        <button class="bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md px-4 py-2">Vegetarian</button>
+        <button class="bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md px-4 py-2">Quick Meals</button>
+    </div>
+
+    <section class="recipe-grid-container">
+        <div class="recipe-grid">
+    
+            <div class="card">
+                <img src="a.jpeg" alt="Oven-Roasted Asparagus" class="card-image">
+                <h3 class="card-title">Oven-Roasted Asparagus</h3>
+                <div class="rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">☆</span>
+                    <span class="rating-value">4.0</span>
+                </div>
+                <a href="recipes.html" class="card-link">View Recipe</a>
+            </div>
+            <div class="card">
+                <img src="Chile-relleno-recipe-450x450.jpg" alt="Chile Relleno Casserole" class="card-image">
+                <h3 class="card-title">Chile Relleno Casserole</h3>
+                <div class="rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">☆</span>
+                    <span class="rating-value">4.0</span>
+                </div>
+                <a href="recipes.html" class="card-link">View Recipe</a>
+            </div>
+            <div class="card">
+                <img src="White-chicken-chili-recipe-450x450.jpg" alt="White Chicken Chili" class="card-image">
+                <h3 class="card-title">White Chicken Chili with Avocado</h3>
+                <div class="rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    <span class="rating-value">4.8</span>
+                </div>
+                <a href="recipes.html" class="card-link">View Recipe</a>
+            </div>
+            <div class="card">
+                <img src="Vegetarian-chili-recipe-450x450.jpg" alt="Vegetarian Chili Recipe" class="card-image" >
+                <h3 class="card-title">Vegetarian Chili & Salsa Recipe</h3>
+                <div class="rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    <span class="rating-value">4.8</span>
+                </div>
+                <a href="recipes.html" class="card-link">View Recipe</a>
+            </div>
+            <div class="card">
+                <img src="Turkey-chili-recipe-450x450.jpg" alt="Turkey Chili Recipe" class="card-image">
+                <h3 class="card-title">Turkey Chili Recipe</h3>
+                <div class="rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    <span class="rating-value">3.0</span>
+                </div>
+                <a href="recipes.html" class="card-link">View Recipe</a>
+            </div>
+            </div>
+            </div>
+            <footer>
+             
+                    <footer style="background-color: black;">
+                      <!-- Footer -->
+                  <footer class="bg-body-tertiary text-center">
+                  <!-- Grid container -->
+                  <!-- Section: Social media -->
+                  <section class="mb-4">
+                    <!-- Facebook -->
+                    <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+                      ><i class="fab fa-facebook-f"></i
+                    ></a>
+                  
+                    <!-- Twitter -->
+                    <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+                      ><i class="fab fa-twitter"></i
+                    ></a>
+                  
+                    <!-- Google -->
+                    <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+                      ><i class="fab fa-google"></i
+                    ></a>
+                  
+                    <!-- Instagram -->
+                    <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+                      ><i class="fab fa-instagram"></i
+                    ></a>
+                  
+                    <!-- Linkedin -->
+                    <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+                      ><i class="fab fa-linkedin-in"></i
+                    ></a>
+                  
+                    <!-- Github -->
+                    <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+                      ><i class="fab fa-github"></i
+                    ></a>
+                  </section>
+                  <!-- Section: Social media -->
+                  
+                  <!-- Section: Form -->
+                  <section class="">
+                    <form action="">
+                      <!--Grid row-->
+                      <div class="row d-flex justify-content-center">
+                        <!--Grid column-->
+                        <div class="col-auto">
+                          <p class="pt-2">
+                            <strong>Sign up for our newsletter</strong>
+                          </p>
+                        </div>
+                        <!--Grid column-->
+                  
+                        <!--Grid column-->
+                        <div class="col-md-5 col-12">
+                          <!-- Email input -->
+                          <div data-mdb-input-init class="form-outline mb-4">
+                            <input type="email" id="form5Example24" class="form-control"placeholder="Email address" />
+                            <label class="form-label" for="form5Example24"></label>
+                          </div>
+                        </div>
+                        <!--Grid column-->
+                  
+                        <!--Grid column-->
+                        <div class="col-auto">
+                          <!-- Submit button -->
+                          <button data-mdb-ripple-init type="submit" class="btn btn-outline mb-4" style="background-color: rgb(217, 97, 33) ;color: azure;">
+                            Subscribe
+                          </button>
+                        </div>
+                        <!--Grid column-->
+                      </div>
+                      <!--Grid row-->
+                    </form>
+                  </section>
+                  <!-- Section: Form -->
+                  
+                  <!-- Section: Text -->
+                  <section class="mb-4">
+                    <img src="generate a logo for a website called flavour fusion . Let it be orange.jpg" alt="Bootstrap" width="60" height="48">
+                    <p>Your Online Recipe Book</p>
+                    <p>Location:San Francisco, CA 94126, USA</p>
+                    <p>+ 01 234 567 89
+                  
+                    </p>
+                  </section>
+                  <!-- Section: Text -->
+                  
+                  <!-- Copyright -->
+                  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+                  © 2020 Copyright:
+                  <a class="text-reset fw-bold" href="">Foodfusion.com</a>
+                  </div>
+                  <!-- Copyright -->
+                  </footer>
+                  <!-- Footer -->
+                   </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
+    </html
