@@ -1,37 +1,32 @@
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const savedRecipesList = document.getElementById('saved-recipes-list');
+    const recipeForm = document.getElementById('recipe-form');
+    const recipeList = document.getElementById('recipe-list');
+
+    let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
 
     function loadSavedRecipes() {
-        const savedRecipeIds = JSON.parse(localStorage.getItem('savedRecipes')) || [];
         savedRecipesList.innerHTML = ''; // Clear previous content
 
-        // Fetch recipe data (replace with your actual data source)
-        const recipes = [
-            { id: 1, title: "Oven-Roasted Asparagus", image: "a.jpeg", ingredients: ["Spaghetti", "Eggs", "Guanciale", "Pecorino Romano"], instructions: "...", rating: 4.5 },
-            { id: 2, title: "Chocolate Chip Cookies", image: "images/cookies.jpg", ingredients: ["Flour", "Butter", "Sugar", "Chocolate Chips"], instructions: "...", rating: 4.8 },
-        ]; // Replace with your data source
-
-        savedRecipeIds.forEach(recipeId => {
-            const recipe = recipes.find(r => r.id === recipeId);
-            if (recipe) {
-                const card = document.createElement('div');
-                card.classList.add('card');
-                card.innerHTML = `
-                    <img src="${recipe.image}" alt="${recipe.title}" class="card-image">
-                    <h3 class="card-title">${recipe.title}</h3>
-                    <div class="rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">☆</span>
-                        <span class="rating-value">${recipe.rating}</span>
-                    </div>
-                    <a href="recipe-details.html?id=${recipe.id}" class="card-link">View Recipe</a>
-                    <button class="delete-button" data-id="${recipe.id}">Delete</button>
-                `;
-                savedRecipesList.appendChild(card);
-            }
+        recipes.forEach(recipe => {
+            const card = document.createElement('div');
+            card.innerHTML = `
+                <img src="${recipe.image || 'placeholder.jpg'}" alt="${recipe.title}" class="card-image">
+                <h3 class="card-title">${recipe.title}</h3>
+                <div class="rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">☆</span>
+                    <span class="rating-value">${recipe.rating || 4.0}</span>
+                </div>
+                <a href="recipe-details.html?id=${recipe.id}" class="card-link">View Recipe</a>
+                <button class="delete-button" data-id="${recipe.id}">Delete</button>
+            `;
+            savedRecipesList.appendChild(card);
         });
 
         // Add event listeners for delete buttons
@@ -41,63 +36,185 @@ document.addEventListener('DOMContentLoaded', () => {
                 const recipeId = parseInt(button.dataset.id);
                 removeRecipe(recipeId);
                 loadSavedRecipes(); // Reload the list
+                displayRecipes();
             });
         });
     }
 
     function removeRecipe(recipeId) {
-        let savedRecipes = JSON.parse(localStorage.getItem('savedRecipes')) || [];
-        savedRecipes = savedRecipes.filter(id => id !== recipeId);
-        localStorage.setItem('savedRecipes', JSON.stringify(savedRecipes));
+        recipes = recipes.filter(recipe => recipe.id !== recipeId);
+        localStorage.setItem('recipes', JSON.stringify(recipes));
     }
 
+    function displayRecipes() {
+        recipeList.innerHTML = '';
+        recipes.forEach((recipe, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <h3>${recipe.title}</h3>
+                <p><strong>Ingredients:</strong></p>
+                <p>${recipe.ingredients}</p>
+                <p><strong>Instructions:</strong></p>
+                <p>${recipe.instructions}</p>
+                <button class="edit-button" onclick="editRecipe(${recipe.id})">Edit</button>
+                <button class="delete-button" onclick="deleteRecipe(${recipe.id})">Delete</button>
+            `;
+            recipeList.appendChild(li);
+        });
+    }
+
+    function editRecipe(recipeId) {
+        const recipe = recipes.find(recipe => recipe.id === recipeId);
+        if (recipe) {
+            document.getElementById('name').value = recipe.title;
+            document.getElementById('ingredients').value = recipe.ingredients;
+            document.getElementById('instructions').value = recipe.instructions;
+            removeRecipe(recipeId);
+            displayRecipes();
+        }
+    }
+
+    function deleteRecipe(recipeId) {
+        removeRecipe(recipeId);
+        displayRecipes();
+    }
+
+    if (recipeForm) {
+        recipeForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const ingredients = document.getElementById('ingredients').value;
+            const instructions = document.getElementById('instructions').value;
+            const recipe = {
+                id: Date.now(),
+                title: name,
+                ingredients: ingredients,
+                instructions: instructions
+            };
+            recipes.push(recipe);
+            localStorage.setItem('recipes', JSON.stringify(recipes));
+            displayRecipes();
+            loadSavedRecipes();
+            this.reset();
+        });
+    }
+
+    displayRecipes();
     loadSavedRecipes();
 });
 
-const recipes = JSON.parse(localStorage.getItem('recipes')) || [];
-
-document.getElementById('recipe-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('name').value;
-    const ingredients = document.getElementById('ingredients').value;
-    const instructions = document.getElementById('instructions').value;
-    const recipe = { name, ingredients, instructions };
-    recipes.push(recipe);
-    localStorage.setItem('recipes', JSON.stringify(recipes));
-    displayRecipes();
-    this.reset();
-});
-
-function displayRecipes() {
+document.addEventListener('DOMContentLoaded', () => {
+    const savedRecipesList = document.getElementById('saved-recipes-list');
+    const recipeForm = document.getElementById('recipe-form');
     const recipeList = document.getElementById('recipe-list');
-    recipeList.innerHTML = '';
-    recipes.forEach((recipe, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-            <h3>${recipe.name}</h3>
-            <p><strong>Ingredients:</strong></p>
-            <p>${recipe.ingredients}</p>
-            <p><strong>Instructions:</strong></p>
-            <p>${recipe.instructions}</p>
-            <button class="edit-button" onclick="editRecipe(${index})">Edit</button>
-            <button class="delete-button" onclick="deleteRecipe(${index})">Delete</button>
-        `;
-        recipeList.appendChild(li);
-    });
-}
 
-function editRecipe(index) {
-    const recipe = recipes[index];
-    document.getElementById('name').value = recipe.name;
-    document.getElementById('ingredients').value = recipe.ingredients;
-    document.getElementById('instructions').value = recipe.instructions;
-    recipes.splice(index, 1);
-}
+    let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
 
-function deleteRecipe(index) {
-    recipes.splice(index, 1);
-    localStorage.setItem('recipes', JSON.stringify(recipes));
+    function loadSavedRecipes() {
+        savedRecipesList.innerHTML = '';
+
+        recipes.forEach(recipe => {
+            const card = document.createElement('div');
+            card.innerHTML = `
+                <img src="${recipe.image || 'placeholder.jpg'}" alt="${recipe.title}" class="card-image">
+                <h3 class="card-title">${recipe.title}</h3>
+                <div class="rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">☆</span>
+                    <span class="rating-value">${recipe.rating || 4.0}</span>
+                </div>
+                <a href="recipe-details.html?id=${recipe.id}" class="card-link">View Recipe</a>
+                <button class="delete-button" data-id="${recipe.id}">Delete</button>
+            `;
+            savedRecipesList.appendChild(card);
+        });
+
+        attachDeleteListeners(savedRecipesList);
+    }
+
+    function removeRecipe(recipeId) {
+        recipes = recipes.filter(recipe => recipe.id !== recipeId);
+        localStorage.setItem('recipes', JSON.stringify(recipes));
+    }
+
+    function displayRecipes() {
+        recipeList.innerHTML = '';
+        recipes.forEach(recipe => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <h3>${recipe.title}</h3>
+                <p><strong>Ingredients:</strong></p>
+                <p>${recipe.ingredients}</p>
+                <p><strong>Instructions:</strong></p>
+                <p>${recipe.instructions}</p>
+                <button class="edit-button" data-id="${recipe.id}">Edit</button>
+                <button class="delete-button" data-id="${recipe.id}">Delete</button>
+            `;
+            recipeList.appendChild(li);
+        });
+        attachEditListeners(recipeList);
+        attachDeleteListeners(recipeList);
+    }
+
+    function editRecipe(recipeId) {
+        const recipe = recipes.find(recipe => recipe.id === recipeId);
+        if (recipe) {
+            document.getElementById('name').value = recipe.title;
+            document.getElementById('ingredients').value = recipe.ingredients;
+            document.getElementById('instructions').value = recipe.instructions;
+            removeRecipe(recipeId);
+            displayRecipes();
+            loadSavedRecipes();
+        }
+    }
+
+    function deleteRecipe(recipeId) {
+        removeRecipe(recipeId);
+        displayRecipes();
+        loadSavedRecipes();
+    }
+
+    function attachEditListeners(container) {
+        container.querySelectorAll('.edit-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const recipeId = parseInt(button.dataset.id);
+                editRecipe(recipeId);
+            });
+        });
+    }
+
+    function attachDeleteListeners(container) {
+        container.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const recipeId = parseInt(button.dataset.id);
+                deleteRecipe(recipeId);
+            });
+        });
+    }
+
+    if (recipeForm) {
+        recipeForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const ingredients = document.getElementById('ingredients').value;
+            const instructions = document.getElementById('instructions').value;
+            const recipe = {
+                id: Date.now(),
+                title: name,
+                ingredients: ingredients,
+                instructions: instructions
+            };
+            recipes.push(recipe);
+            localStorage.setItem('recipes', JSON.stringify(recipes));
+            displayRecipes();
+            loadSavedRecipes();
+            this.reset();
+        });
+    }
+
     displayRecipes();
-}
-
-window.onload = displayRecipes;
+    loadSavedRecipes();
+});

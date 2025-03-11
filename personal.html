@@ -7,6 +7,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <style>
+
+.btns{
+      height: 35px;
+      border-radius: 5px;
+      border: none;
+      background-color: rgb(217, 97, 33);
+      color:azure;
+    }
+
     body {
     font-family: Arial, sans-serif;
 }
@@ -98,6 +107,9 @@ body {
                     <li class="nav-item">
                         <a class="nav-link" href="personal.html">Personal</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="member.html">Membership</a>
+                    </li>
                     
                 </ul>
                 <div class="search-container">
@@ -109,7 +121,9 @@ body {
             </div>
         </div>
     </nav>
-    <h1>Recipe Book</h1>
+
+
+  
     <div class="container">
         <div class="left-column">
             <h2>Add a Recipe</h2>
@@ -120,11 +134,11 @@ body {
                 <textarea id="ingredients" rows="5" required></textarea>
                 <label for="instructions">Instructions:</label>
                 <textarea id="instructions" rows="5" required></textarea>
-                <button type="submit">Add Recipe</button>
+                <button class="btns" type="submit">Add Recipe</button>
             </form>
         </div>
         <div class="right-column">
-            <h2>Recipes</h2>
+            <h2>Your Recipes</h2>
             <ul id="recipe-list"></ul>
         </div>
     </div>
@@ -135,8 +149,107 @@ body {
         </div>
     </main>
 
-    <script src="p.js"></script>
+      <footer style="background-color: black;">
+                      <!-- Footer -->
+                  <footer class="bg-body-tertiary text-center">
+                  <!-- Grid container -->
+                  <!-- Section: Social media -->
+                  <section class="mb-4">
+                    <!-- Facebook -->
+                    <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+                      ><i class="fab fa-facebook-f"></i
+                    ></a>
+                  
+                    <!-- Twitter -->
+                    <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+                      ><i class="fab fa-twitter"></i
+                    ></a>
+                  
+                    <!-- Google -->
+                    <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+                      ><i class="fab fa-google"></i
+                    ></a>
+                  
+                    <!-- Instagram -->
+                    <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+                      ><i class="fab fa-instagram"></i
+                    ></a>
+                  
+                    <!-- Linkedin -->
+                    <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+                      ><i class="fab fa-linkedin-in"></i
+                    ></a>
+                  
+                    <!-- Github -->
+                    <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+                      ><i class="fab fa-github"></i
+                    ></a>
+                  </section>
+                  <!-- Section: Social media -->
+                  
+                  <!-- Section: Form -->
+                  <section class="">
+                    <form action="">
+                      <!--Grid row-->
+                      <div class="row d-flex justify-content-center">
+                        <!--Grid column-->
+                        <div class="col-auto">
+                          <p class="pt-2">
+                            <strong>Sign up for our newsletter</strong>
+                          </p>
+                        </div>
+                        <!--Grid column-->
+                  
+                        <!--Grid column-->
+                        <div class="col-md-5 col-12">
+                          <!-- Email input -->
+                          <div data-mdb-input-init class="form-outline mb-4">
+                            <input type="email" id="form5Example24" class="form-control"placeholder="Email address" />
+                            <label class="form-label" for="form5Example24"></label>
+                          </div>
+                        </div>
+                        <!--Grid column-->
+                  
+                        <!--Grid column-->
+                        <div class="col-auto">
+                          <!-- Submit button -->
+                          <button data-mdb-ripple-init type="submit" class="btn btn-outline mb-4" style="background-color: rgb(217, 97, 33) ;color: azure;">
+                            Subscribe
+                          </button>
+                        </div>
+                        <!--Grid column-->
+                      </div>
+                      <!--Grid row-->
+                    </form>
+                  </section>
+                  <!-- Section: Form -->
+                  
+                  <!-- Section: Text -->
+                  <section class="mb-4">
+                    <img src="generate a logo for a website called flavour fusion . Let it be orange.jpg" alt="Bootstrap" width="60" height="48">
+                    <p>Your Online Recipe Book</p>
+                    <p>Location:San Francisco, CA 94126, USA</p>
+                    <p>+ 01 234 567 89
+                  
+                    </p>
+                  </section>
+                  <!-- Section: Text -->
+                  
+                  <!-- Copyright -->
+                  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+                  © 2020 Copyright:
+                  <a class="text-reset fw-bold" href="">Foodfusion.com</a>
+                  </div>
+                  <!-- Copyright -->
+                  </footer>
+                  <!-- Footer -->
+                   </footer>
+
+
+
+    
     <script src="recipes.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
